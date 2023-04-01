@@ -1,0 +1,3 @@
+**/*.sh
+/db/data
+/src/config/app.php

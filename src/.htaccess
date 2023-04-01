@@ -1,0 +1,7 @@
+RewriteEngine On
+
+RewriteRule ([a-z]+\.(png|jpg))$ assets/img/$1 [QSA,NC,L]
+RewriteRule ([a-z]+\.css)$ assets/css/$1 [QSA,NC,L]
+RewriteRule ([a-z]+\.js)$ assets/js/$1 [QSA,NC,L]
+
+RewriteRule (.*) index.php?url=$1 [QSA,NC,L]

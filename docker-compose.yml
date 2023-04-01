@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+
+  db:
+    image: mysql/mysql-server:5.7
+    volumes:
+      - ./db/data:/var/lib/mysql
+      - ./db/init:/docker-entrypoint-initdb.d
+    environment:
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_ROOT_PASSWORD=123456
+    command: --character-set-server=utf8 --collation-server=utf8_unicode_ci
+
+  api:
+    image: douglascarlini/php:7.2
+    volumes:
+      - $PWD/src:/var/www/html
+    ports:
+      - 8090:80
+    depends_on:
+      - db
+
+  pma:
+    image: phpmyadmin
+    environment:
+      - PMA_HOST=db
+      - PMA_PORT=3306
+    ports:
+      - 8091:80
+    depends_on:
+      - db
